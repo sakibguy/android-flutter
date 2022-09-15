@@ -9,8 +9,12 @@ class AppPages {
   static const INITIAL = Routes.HOME;
 
   static final routes = [
-      GetPage(name: _Paths.HOME, page: () => Container()),
-      GetPage(name: _Paths.LOGIN, page: () => Container()),
-      GetPage(name: _Paths.SIGNUP, page: () => Container()),
+      GetPage(name: _Paths.HOME, page: () => Container(
+        child: Text("HOME widget"),                           // define, call custom widget
+      )),
+      GetPage(name: _Paths.LOGIN, page: () => Container(
+        child: Text("Container widget"),                      // define, call custom widget
+      )),
+      GetPage(name: _Paths.SIGNUP, page: () => Container()),  // define, call custom widget
   ];
 }
