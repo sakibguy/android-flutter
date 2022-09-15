@@ -121,7 +121,7 @@ import 'package:get/route_manager.dart';
 void main() {
   runApp(
     GetMaterialApp(
-
+      title: "My GetX App",
     ),
   );
 }
