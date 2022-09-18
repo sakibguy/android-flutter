@@ -18,15 +18,33 @@ class HomeView extends GetView<HomeController> {
               icon: Icon(Icons.arrow_forward_ios_rounded))
         ],
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text("You have pushed the button many times."),
-            Text("0"),
-          ],
-        ),
-      ),
+      body: controller.obx((data) {
+        return ListView.builder(
+          padding: const EdgeInsets.all(8),
+          itemCount: data == null ? 0 : data.length,
+          itemBuilder: (_, index) {
+            return Card(
+              child: Column(
+                children: [
+                  ListTile(
+                    leading: CircleAvatar(
+                      backgroundImage:
+                          NetworkImage(data![index]['picture']['large']),
+                    ),
+                    title: Text(data![index]['name']['title'] +
+                        " " +
+                        data![index]['name']['first'] +
+                        " " +
+                        data![index]['name']['last']),
+                    subtitle: Text(data![index]['email']),
+                    trailing: Text("Age: ${data![index]['dob']['age']}"),
+                  )
+                ],
+              ),
+            );
+          },
+        );
+      }, onError: (err) => Center(child: Text(err!))),
       floatingActionButton: FloatingActionButton(
         onPressed: () => controller.increment(),
         tooltip: 'Increment',
