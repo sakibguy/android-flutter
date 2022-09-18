@@ -3,7 +3,10 @@ import 'package:getx_demo/app/modules/home/providers/UserProvider.dart';
 
 class HomeController extends GetxController with StateMixin<List<dynamic>> {
   final RxInt count = 0.obs; // RxInt(0);
-  void increment() => count.value++;
+  void increment() {
+    count.value++;
+    print(count.value);
+  }
 
   final UserProvider _userProvider = UserProvider();
   @override
