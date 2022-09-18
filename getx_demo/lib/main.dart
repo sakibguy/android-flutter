@@ -1,9 +1,9 @@
 // import 'package:flutter/material.dart';
-//
+
 // void main() {
 //   runApp(const MyApp());
 // }
-//
+
 // class MyApp extends StatelessWidget {
 //   const MyApp({Key? key}) : super(key: key);
 //
@@ -114,7 +114,6 @@
 //   }
 // }
 
-
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:getx_demo/app/routes/app_pages.dart';
@@ -122,9 +121,20 @@ import 'package:getx_demo/app/routes/app_pages.dart';
 void main() {
   runApp(
     GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       title: "My GetX App",
       getPages: AppPages.routes,
       initialRoute: AppPages.INITIAL,
     ),
   );
 }
+
+// void main() {
+//   runApp(
+//    GetMaterialApp(
+//      title: "Get Material App",
+//      initialRoute: AppPages.INITIAL,
+//      getPages: AppPages.routes,
+//    )
+//   );
+// }
