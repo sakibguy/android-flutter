@@ -1,10 +1,12 @@
-# FLUTTER wOrK 1
+# FLUTTER wOrK 2
 
 # 1-MYALICE
 ## PRODUCT 1: MYALICEAPP
 > https://play.google.com/store/apps/details?id=com.alice.myalice
 
 # 2-MAKEAPP
+## APP 1: DAILYFOOTBALLTRANSFER
+> [design](https://www.figma.com/file/dekhabJglospiuJ4m5HfGN/Daily-Football-Transfer?node-id=0%3A1)
 
 
 # ORGs
