@@ -40,3 +40,30 @@
 //   ];
 // }
 
+
+import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
+import '../modules/home/bindings/home_binding.dart';
+import '../modules/home/views/home_view.dart';
+
+part 'app_routes.dart';
+
+class AppPages {
+  static const INITIAL = Routes.HOME;
+
+  static final routes = [
+    GetPage(
+        name: _Paths.HOME,
+        page: () => HomeView(),
+        binding: HomeBinding()
+    ),
+    GetPage(
+        name: _Paths.LOGIN,
+        page: () => Container()
+    ),
+    GetPage(
+        name: _Paths.SIGNUP,
+        page: () => Container()
+    )
+  ];
+}
