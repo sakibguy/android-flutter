@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -155,3 +156,4 @@ class HomeView extends GetView<HomeController> {
 // GetX Increase Perf (How: Allocate less res, less app size by defining routes, pages, binding, auto instantiate, dispose, dependency injections, state management...etc
 // GetX, influence MCV arch pattern
 // Minded: Flutter sys arch practice & best practice & alice app practices (business + code)
+*/

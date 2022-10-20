@@ -1,3 +1,4 @@
+/*
 // import 'package:flutter/material.dart';
 //
 // void main() {
@@ -160,4 +161,69 @@ void main() {
       initialRoute: AppPages.INITIAL,
     ),
   );
+}*/
+
+
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget{
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: ContentWidget(),
+    );
+  }
+}
+
+class ContentWidget extends StatefulWidget {
+  final String title = "PA SW";
+  const ContentWidget({super.key});
+
+  @override
+  State<ContentWidget> createState() => _ContentWidgetState();
+}
+
+class _ContentWidgetState extends State<ContentWidget> {
+  int _value = 1;
+
+  void _incrementValue() {
+    setState(() {
+      _value++;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      floatingActionButton: FloatingActionButton(
+        tooltip: "Increment",
+        // onPressed: () => {
+        //   _incrementValue()
+        // },
+        onPressed: _incrementValue,
+        child: Icon(Icons.add),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text("TV11"),
+            Text("TV2"),
+            Text('$_value'),
+          ],
+        )
+      ),
+    );
+  }
 }
