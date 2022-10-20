@@ -1,3 +1,4 @@
+/*
 import 'package:get/get.dart';
 
 import '../providers/UserProvider.dart';
@@ -38,3 +39,4 @@ class HomeController extends GetxController with StateMixin<List<dynamic>> {
     super.onReady();
   }
 }
+*/
