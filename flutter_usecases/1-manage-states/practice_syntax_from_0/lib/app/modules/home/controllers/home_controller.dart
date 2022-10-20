@@ -40,3 +40,25 @@ class HomeController extends GetxController with StateMixin<List<dynamic>> {
   }
 }
 */
+
+
+import 'package:get/get.dart';
+import 'package:practice_syntax_from_0/app/modules/home/providers/UserProvider.dart';
+
+class HomeController extends GetxController with StateMixin<List<dynamic>>{
+    UserProvider _userProvider = UserProvider();
+
+    @override
+    void onInit() {
+        print('HomeController has been created!!!');
+
+        _userProvider.getUsers().then((response) {
+            print(response);
+            change(response, status: RxStatus.success());
+        }, onError: (error) {
+            change(error, status: RxStatus.error(error.toString()));
+        });
+
+        super.onInit();
+    }
+}
