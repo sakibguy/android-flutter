@@ -1,0 +1,320 @@
+// To parse this JSON data, do
+//
+//     final welcome = welcomeFromJson(jsonString);
+
+import 'dart:convert';
+
+Welcome welcomeFromJson(String str) => Welcome.fromJson(json.decode(str));
+
+String welcomeToJson(Welcome data) => json.encode(data.toJson());
+
+class Welcome {
+    Welcome({
+        this.success,
+        this.dataSource,
+        this.actions,
+    });
+
+    bool success;
+    List<DataSource> dataSource;
+    List<Action> actions;
+
+    factory Welcome.fromJson(Map<String, dynamic> json) => Welcome(
+        success: json["success"],
+        dataSource: List<DataSource>.from(json["dataSource"].map((x) => DataSource.fromJson(x))),
+        actions: List<Action>.from(json["actions"].map((x) => Action.fromJson(x))),
+    );
+
+    Map<String, dynamic> toJson() => {
+        "success": success,
+        "dataSource": List<dynamic>.from(dataSource.map((x) => x.toJson())),
+        "actions": List<dynamic>.from(actions.map((x) => x.toJson())),
+    };
+}
+
+class Action {
+    Action({
+        this.action,
+        this.isAllowed,
+    });
+
+    String action;
+    bool isAllowed;
+
+    factory Action.fromJson(Map<String, dynamic> json) => Action(
+        action: json["action"],
+        isAllowed: json["is_allowed"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "action": action,
+        "is_allowed": isAllowed,
+    };
+}
+
+class DataSource {
+    DataSource({
+        this.id,
+        this.source,
+        this.type,
+        this.event,
+        this.platformType,
+        this.conversationId,
+        this.timestamp,
+        this.platformId,
+        this.projectId,
+        this.customerId,
+        this.isSeen,
+        this.isDelivered,
+        this.success,
+        this.report,
+        this.adminId,
+        this.adminInfo,
+        this.dataV2,
+    });
+
+    String id;
+    Source source;
+    EventEnum type;
+    EventEnum event;
+    PlatformType platformType;
+    String conversationId;
+    int timestamp;
+    int platformId;
+    int projectId;
+    int customerId;
+    bool isSeen;
+    bool isDelivered;
+    bool success;
+    Report report;
+    int adminId;
+    AdminInfo adminInfo;
+    DataV2 dataV2;
+
+    factory DataSource.fromJson(Map<String, dynamic> json) => DataSource(
+        id: json["id"],
+        source: sourceValues.map[json["source"]],
+        type: eventEnumValues.map[json["type"]],
+        event: json["event"] == null ? null : eventEnumValues.map[json["event"]],
+        platformType: platformTypeValues.map[json["platform_type"]],
+        conversationId: json["conversation_id"],
+        timestamp: json["timestamp"],
+        platformId: json["platform_id"],
+        projectId: json["project_id"],
+        customerId: json["customer_id"],
+        isSeen: json["is_seen"],
+        isDelivered: json["is_delivered"],
+        success: json["success"] == null ? null : json["success"],
+        report: Report.fromJson(json["report"]),
+        adminId: json["admin_id"] == null ? null : json["admin_id"],
+        adminInfo: AdminInfo.fromJson(json["admin_info"]),
+        dataV2: DataV2.fromJson(json["dataV2"]),
+    );
+
+    Map<String, dynamic> toJson() => {
+        "id": id,
+        "source": sourceValues.reverse[source],
+        "type": eventEnumValues.reverse[type],
+        "event": event == null ? null : eventEnumValues.reverse[event],
+        "platform_type": platformTypeValues.reverse[platformType],
+        "conversation_id": conversationId,
+        "timestamp": timestamp,
+        "platform_id": platformId,
+        "project_id": projectId,
+        "customer_id": customerId,
+        "is_seen": isSeen,
+        "is_delivered": isDelivered,
+        "success": success == null ? null : success,
+        "report": report.toJson(),
+        "admin_id": adminId == null ? null : adminId,
+        "admin_info": adminInfo.toJson(),
+        "dataV2": dataV2.toJson(),
+    };
+}
+
+class AdminInfo {
+    AdminInfo({
+        this.id,
+        this.email,
+        this.avatar,
+        this.fullName,
+    });
+
+    int id;
+    Email email;
+    String avatar;
+    FullName fullName;
+
+    factory AdminInfo.fromJson(Map<String, dynamic> json) => AdminInfo(
+        id: json["id"] == null ? null : json["id"],
+        email: json["email"] == null ? null : emailValues.map[json["email"]],
+        avatar: json["avatar"] == null ? null : json["avatar"],
+        fullName: json["full_name"] == null ? null : fullNameValues.map[json["full_name"]],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "id": id == null ? null : id,
+        "email": email == null ? null : emailValues.reverse[email],
+        "avatar": avatar == null ? null : avatar,
+        "full_name": fullName == null ? null : fullNameValues.reverse[fullName],
+    };
+}
+
+enum Email { MASUMA_1_MYALICE_AI }
+
+final emailValues = EnumValues({
+    "masuma+1@myalice.ai": Email.MASUMA_1_MYALICE_AI
+});
+
+enum FullName { MASUMA_IMU }
+
+final fullNameValues = EnumValues({
+    "Masuma Imu": FullName.MASUMA_IMU
+});
+
+class DataV2 {
+    DataV2({
+        this.type,
+        this.success,
+        this.error,
+        this.text,
+        this.button,
+        this.payload,
+        this.subType,
+        this.urls,
+        this.title,
+        this.buttons,
+    });
+
+    DataV2Type type;
+    bool success;
+    String error;
+    String text;
+    List<Button> button;
+    String payload;
+    String subType;
+    List<String> urls;
+    String title;
+    List<Button> buttons;
+
+    factory DataV2.fromJson(Map<String, dynamic> json) => DataV2(
+        type: dataV2TypeValues.map[json["type"]],
+        success: json["success"],
+        error: json["error"],
+        text: json["text"] == null ? null : json["text"],
+        button: json["button"] == null ? null : List<Button>.from(json["button"].map((x) => Button.fromJson(x))),
+        payload: json["payload"] == null ? null : json["payload"],
+        subType: json["sub_type"] == null ? null : json["sub_type"],
+        urls: json["urls"] == null ? null : List<String>.from(json["urls"].map((x) => x)),
+        title: json["title"] == null ? null : json["title"],
+        buttons: json["buttons"] == null ? null : List<Button>.from(json["buttons"].map((x) => Button.fromJson(x))),
+    );
+
+    Map<String, dynamic> toJson() => {
+        "type": dataV2TypeValues.reverse[type],
+        "success": success,
+        "error": error,
+        "text": text == null ? null : text,
+        "button": button == null ? null : List<dynamic>.from(button.map((x) => x.toJson())),
+        "payload": payload == null ? null : payload,
+        "sub_type": subType == null ? null : subType,
+        "urls": urls == null ? null : List<dynamic>.from(urls.map((x) => x)),
+        "title": title == null ? null : title,
+        "buttons": buttons == null ? null : List<dynamic>.from(buttons.map((x) => x.toJson())),
+    };
+}
+
+class Button {
+    Button({
+        this.id,
+        this.type,
+        this.title,
+        this.value,
+    });
+
+    int id;
+    String type;
+    String title;
+    String value;
+
+    factory Button.fromJson(Map<String, dynamic> json) => Button(
+        id: json["id"],
+        type: json["type"],
+        title: json["title"],
+        value: json["value"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "id": id,
+        "type": type,
+        "title": title,
+        "value": value,
+    };
+}
+
+enum DataV2Type { BUTTON, TEXT, ACTION, ATTACHMENT, NOTE, QUICK_REPLY }
+
+final dataV2TypeValues = EnumValues({
+    "action": DataV2Type.ACTION,
+    "attachment": DataV2Type.ATTACHMENT,
+    "button": DataV2Type.BUTTON,
+    "note": DataV2Type.NOTE,
+    "quick_reply": DataV2Type.QUICK_REPLY,
+    "text": DataV2Type.TEXT
+});
+
+enum EventEnum { MESSAGE, ACTION, NOTE }
+
+final eventEnumValues = EnumValues({
+    "action": EventEnum.ACTION,
+    "message": EventEnum.MESSAGE,
+    "note": EventEnum.NOTE
+});
+
+enum PlatformType { FACEBOOK_MESSENGER }
+
+final platformTypeValues = EnumValues({
+    "facebook_messenger": PlatformType.FACEBOOK_MESSENGER
+});
+
+class Report {
+    Report({
+        this.recipientId,
+        this.messageId,
+    });
+
+    String recipientId;
+    String messageId;
+
+    factory Report.fromJson(Map<String, dynamic> json) => Report(
+        recipientId: json["recipient_id"] == null ? null : json["recipient_id"],
+        messageId: json["message_id"] == null ? null : json["message_id"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "recipient_id": recipientId == null ? null : recipientId,
+        "message_id": messageId == null ? null : messageId,
+    };
+}
+
+enum Source { BOT, CUSTOMER, ADMIN }
+
+final sourceValues = EnumValues({
+    "admin": Source.ADMIN,
+    "bot": Source.BOT,
+    "customer": Source.CUSTOMER
+});
+
+class EnumValues<T> {
+    Map<String, T> map;
+    Map<T, String> reverseMap;
+
+    EnumValues(this.map);
+
+    Map<T, String> get reverse {
+        if (reverseMap == null) {
+            reverseMap = map.map((k, v) => new MapEntry(v, k));
+        }
+        return reverseMap;
+    }
+}

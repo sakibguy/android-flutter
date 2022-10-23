@@ -1,0 +1,7 @@
+Endpoint: https://stage-api.myalice.ai/api/crm/tickets/2707/get-conversation
+
+Authorization
+Key: Authorization
+Token: Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY2NTUzMDE3LCJqdGkiOiJhMjMxZjAzZjE4MjM0MjllYjIzYzRlYTUzODAwNWI1OCIsInVzZXJfaWQiOjI1Nn0.ul43--_THgTYO3GJW_oKfJYrwXaaSRAgw850f_ucGJ0
+
+https://app.quicktype.io/
