@@ -1,4 +1,4 @@
-name: dio
+name: dio_demo
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -36,6 +36,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  dio: ^4.0.6
 
 dev_dependencies:
   flutter_test:
