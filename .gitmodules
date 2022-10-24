@@ -1,0 +1,3 @@
+[submodule "flutter_usecases/1-manage-states/Dio_http_request"]
+	path = flutter_usecases/1-manage-states/Dio_http_request
+	url = https://github.com/samirpokharel/Dio_http_request.git
