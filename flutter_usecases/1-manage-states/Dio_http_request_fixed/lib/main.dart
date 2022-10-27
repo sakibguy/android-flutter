@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
                     if (!snapshot.hasData) {
                       return Center(child: CircularProgressIndicator());
                     } else {
-                      List<Article> newsArticle = snapshot.data;
+                      List<Article>newsArticle = snapshot.data;
                       return ListView.builder(
                         itemCount: newsArticle.length,
                         itemBuilder: (context, index) {
