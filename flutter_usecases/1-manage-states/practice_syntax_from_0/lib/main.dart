@@ -163,17 +163,107 @@ void main() {
   );
 }*/
 
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:practice_syntax_from_0/app/routes/app_pages.dart';
+import 'package:practice_syntax_from_0/app/dio/DioController.dart';
+import 'package:practice_syntax_from_0/app/dio/DioModel.dart';
 
-void main() {
-  runApp(
-    GetMaterialApp(
-      title: "GMA Title",
-      getPages: AppPages.routes,
-      initialRoute: AppPages.INITIAL,
-    )
-  );
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: "Dio Get",
+      home: HomePage(),
+    );
+  }
 }
+
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.all(8),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Text 1"),
+                Text("Text 2"),
+                Text("Text 3"),
+                Expanded(
+                    child: FutureBuilder<List<Article>>(
+                      future: DioController().fetchNewsArticle(),
+                      builder: (context, snapshot) {
+                        if(!snapshot.hasData) {
+                          var data = snapshot.data.toString();
+                          print('[---ok---] snapshot $data');
+                          return Center(child: CircularProgressIndicator());
+                        } else {
+                          List<Article> newsArticle = snapshot.data!;
+
+                          return ListView.builder(
+                              itemCount: newsArticle.length,
+                              itemBuilder: (context, index) {
+                                return NewsTile(article: newsArticle[index]);
+                              }
+                          );
+                        }
+                      },
+                    ),
+                )
+              ],
+            ),
+          ),
+        ),
+      )
+    );
+  }
+}
+
+class NewsTile extends StatelessWidget {
+  final Article article;
+
+  const NewsTile({required this.article});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(7),
+      child: ListTile(
+        onTap: null,
+        title: Text(
+          article.title,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+        ),
+        subtitle: Text(
+          article.description,
+          maxLines: 4,
+          overflow: TextOverflow.ellipsis,
+        ),
+        leading: article.urlToImage != null
+          ? Container(
+              width: 100,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                image: DecorationImage(
+                  image: NetworkImage(article.urlToImage)
+                ),
+              ),
+            )
+          : null,
+      ),
+    );
+  }
+}
+
