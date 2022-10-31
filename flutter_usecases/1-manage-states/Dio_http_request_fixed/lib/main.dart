@@ -44,9 +44,14 @@ class _HomePageState extends State<HomePage> {
                 child: FutureBuilder<List<Article>>(
                   future: NewsController().fetchNewsArticle(),
                   builder: (context, snapshot) {
+                    var data = snapshot.data;
+
                     if (!snapshot.hasData) {
+                      print("[---ok---] ifdata: $data");
                       return Center(child: CircularProgressIndicator());
                     } else {
+                      print("[---ok---] elsedata: $data");
+
                       List<Article>newsArticle = snapshot.data;
                       return ListView.builder(
                         itemCount: newsArticle.length,
