@@ -1,7 +1,3 @@
-import 'dart:convert';
-
-NewsResponse newsResponseFromJson(String str) => NewsResponse.fromJson(json.decode(str));
-
 class NewsResponse {
   NewsResponse({
     required this.status,
@@ -16,7 +12,8 @@ class NewsResponse {
   factory NewsResponse.fromJson(Map<String, dynamic> json) => NewsResponse(
     status: json["status"],
     totalResults: json["totalResults"],
-    articles: List<Article>.from(json["articles"].map((x) => Article.fromJson(x))),
+    articles: List<Article>.from(
+        json["articles"].map((x) => Article.fromJson(x))),
   );
 }
 
@@ -38,7 +35,7 @@ class Article {
   String description;
   String url;
   String urlToImage;
-  DateTime publishedAt;
+  String publishedAt;
   String content;
 
   factory Article.fromJson(Map<String, dynamic> json) => Article(
@@ -48,7 +45,7 @@ class Article {
     description: json["description"],
     url: json["url"],
     urlToImage: json["urlToImage"] == null ? null : json["urlToImage"],
-    publishedAt: DateTime.parse(json["publishedAt"]),
+    publishedAt: json["publishedAt"],
     content: json["content"],
   );
 }
