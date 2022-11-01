@@ -1,4 +1,4 @@
-# dio_post
+# getx_dio
 
 A new Flutter project.
 

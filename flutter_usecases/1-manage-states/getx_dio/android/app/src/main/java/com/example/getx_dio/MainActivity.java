@@ -1,4 +1,4 @@
-package com.example.dio_post;
+package com.example.getx_dio;
 
 import io.flutter.embedding.android.FlutterActivity;
 
