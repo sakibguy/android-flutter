@@ -1,3 +1,4 @@
+/*
 import 'package:get/get.dart';
 
 import '../controller/home_controller.dart';
@@ -7,4 +8,5 @@ class HomeBinding extends Bindings {
   void dependencies() {
     Get.put(HomeController());
   }
-}
+}*/
+

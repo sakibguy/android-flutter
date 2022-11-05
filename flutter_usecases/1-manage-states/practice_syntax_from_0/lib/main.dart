@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:practice_syntax_from_0/routes/routes.dart';
@@ -20,4 +21,17 @@ void main() => runApp(
     ],
     initialRoute: Routes.INITIAL,
   )
-);
+);*/
+
+
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'app/routes/app_pages.dart';
+
+void main() {
+  runApp(GetMaterialApp(
+    title: "GMA",
+    initialRoute: AppPages.INITIAL,
+    getPages: AppPages.routes,
+  ));
+}
