@@ -38,6 +38,7 @@
 //   }
 // }
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:practice_syntax_from_0/app/routes/app_pages.dart';
@@ -87,7 +88,7 @@ class HomeView extends GetView<HomeController> {
 
                     children: <Widget> [
                       ListTile(
-                        onTap: () => Get.dialog(
+                        onTap: () => {} /*Get.dialog(
                           AlertDialog(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15)
@@ -106,7 +107,7 @@ class HomeView extends GetView<HomeController> {
                               TextButton(onPressed: () => Get.back(), child: Text("Wel Done!"))
                             ],
                           )
-                        ),
+                        )*/,
                         leading: CircleAvatar(
                           backgroundImage: NetworkImage(
                             data![index]['picture']['large']
@@ -123,8 +124,76 @@ class HomeView extends GetView<HomeController> {
           },
         );
       }, onError: (err) => Text("Err!")),
-      floatingActionButton: new FloatingActionButton(
-          onPressed: () => controller.increment(),
+      floatingActionButton: FloatingActionButton(
+          onPressed: () => Get.bottomSheet(Material(
+            borderRadius: BorderRadius.circular(15),
+              child: controller.obx((data) => Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: Container(
+                    margin: EdgeInsets.only(top: 5),
+                    height: 5,
+                    width: Get.width/3,
+                    decoration: BoxDecoration(
+                      color: Colors.black26,
+                      borderRadius: BorderRadius.circular(100)
+                    ),
+                  ),
+                ),
+                ListTile(
+                  leading: CircleAvatar(
+                    backgroundImage: NetworkImage(
+                        data![0]['picture']['large']
+                    ),
+                  ),
+                  title: Text("${data[0]['name']['title']}" + " " + "${data[0]['name']['first']}" + " " + "${data[0]['name']['last']}"),
+                  subtitle: RichText(
+                    text: TextSpan(
+                      text: 'email ${data[0]['email']}',
+                      style: const TextStyle(
+                        color: Colors.black38
+                      ),
+                      children: const [
+                        WidgetSpan(child: Icon(Icons.arrow_drop_down_outlined, size: 20))
+                      ],
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Get.back();
+                        }
+                    ),
+                  ),
+                ),
+
+                Divider(color: Colors.black38),
+                Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                    child: Text("My tasks", style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),)
+                ),
+                Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                    child: Text("Demo lists", style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),)
+                ),
+                Divider(color: Colors.black38),
+
+                ListTile(
+                  leading: Icon(Icons.add),
+                  title: Text("Create new list"),
+                ),
+                ListTile(
+                  leading: Icon(Icons.feedback_rounded),
+                  title: Text("Send feedback"),
+                ),
+                Divider(color: Colors.black38),
+              ]
+            )
+          ))),
           tooltip: 'Increment',
           child: Icon(Icons.add),
       ),
