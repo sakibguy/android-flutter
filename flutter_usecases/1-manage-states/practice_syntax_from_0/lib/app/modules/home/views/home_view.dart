@@ -62,10 +62,12 @@ class HomeView extends GetView<HomeController> {
         child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget> [
-            GetX<HomeController>(
-                builder: (controller) =>
-                    Text(controller.count.value.toString())
-            ),
+            Obx(() => Text(controller.count.value.toString())),
+
+            // GetX<HomeController>(
+            //     builder: (controller) =>
+            //         Text(controller.count.value.toString())
+            // ),
           ],
         ),
       ),
