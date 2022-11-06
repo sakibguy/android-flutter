@@ -87,18 +87,23 @@ class HomeView extends GetView<HomeController> {
 
                     children: <Widget> [
                       ListTile(
-                        onTap: () => Get.defaultDialog(
-                            title: "This is ${data[index]['name']['title'] + " " +
-                          data[index]['name']['first']+ " " +
-                          data[index]['name']['last']}",
-                          textConfirm: "Cool!",
-                          textCancel: "Close",
-                          onConfirm: () => print('Hello World!'),
-                          content: Column(
-                            children: [
-                              Text("Age: ${data[index]['dob']['age']}"),
-                              Text("Gen: ${data[index]['name']['title']}"),
-                              Text("Country: ${data[index]['location']['city']}}"),
+                        onTap: () => Get.dialog(
+                          AlertDialog(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15)
+                            ),
+                            title: SizedBox(
+                              width: 250,
+                              child: Row(
+                                children: [
+                                  Icon(Icons.add),
+                                  Text("This is a custom dialog"),
+                                ],
+                              ),
+                            ),
+                            actions: [
+                              TextButton(onPressed: () => Get.back(), child: Text("Cancel")),
+                              TextButton(onPressed: () => Get.back(), child: Text("Wel Done!"))
                             ],
                           )
                         ),
