@@ -58,21 +58,22 @@ class HomeView extends GetView<HomeController> {
           )
         ],
       ),
-      body: Center(
-        child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget> [
-            Obx(() => Text(controller.count.value.toString())),
 
-            // GetX<HomeController>(
-            //     builder: (controller) =>
-            //         Text(controller.count.value.toString())
-            // ),
-          ],
-        ),
-      ),
+      // body: Center(
+      //   child: Column(
+      //   mainAxisAlignment: MainAxisAlignment.center,
+      //     children: <Widget> [
+      //       Obx(() => Text(controller.count.value.toString())),
+      //
+      //       // GetX<HomeController>(
+      //       //     builder: (controller) =>
+      //       //         Text(controller.count.value.toString())
+      //       // ),
+      //     ],
+      //   ),
+      // ),
 
-      /*controller.obx((data) {
+      body: controller.obx((data) {
         return ListView.builder(
           itemCount: data == null ? 0 : data.length,
           itemBuilder: (_, index) {
@@ -80,28 +81,43 @@ class HomeView extends GetView<HomeController> {
                 child: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget> [
-                      Text(controller.value.toString()),
-                    ],
-
                     // children: <Widget> [
-                    //   ListTile(
-                    //     leading: CircleAvatar(
-                    //       backgroundImage: NetworkImage(
-                    //         data![index]['picture']['large']
-                    //       ),
-                    //     ),
-                    //     title: Text("${data[index]['name']['title']}" + " " + "${data[index]['name']['first']}" + " " + "${data[index]['name']['last']}"),
-                    //     subtitle: Text("${data[index]['location']['city']}"),
-                    //     trailing: Text("Age: ${data[index]['dob']['age']}"),
-                    //   )
+                    //   Text(controller.value.toString()),
                     // ],
+
+                    children: <Widget> [
+                      ListTile(
+                        onTap: () => Get.defaultDialog(
+                            title: "This is ${data[index]['name']['title'] + " " +
+                          data[index]['name']['first']+ " " +
+                          data[index]['name']['last']}",
+                          textConfirm: "Cool!",
+                          textCancel: "Close",
+                          onConfirm: () => print('Hello World!'),
+                          content: Column(
+                            children: [
+                              Text("Age: ${data[index]['dob']['age']}"),
+                              Text("Gen: ${data[index]['name']['title']}"),
+                              Text("Country: ${data[index]['location']['city']}}"),
+                            ],
+                          )
+                        ),
+                        leading: CircleAvatar(
+                          backgroundImage: NetworkImage(
+                            data![index]['picture']['large']
+                          ),
+                        ),
+                        title: Text("${data[index]['name']['title']}" + " " + "${data[index]['name']['first']}" + " " + "${data[index]['name']['last']}"),
+                        subtitle: Text("${data[index]['location']['city']}"),
+                        trailing: Text("Age: ${data[index]['dob']['age']}"),
+                      )
+                    ],
                   ),
                 )
             );
           },
         );
-      }, onError: (err) => Text("Err!")),*/
+      }, onError: (err) => Text("Err!")),
       floatingActionButton: new FloatingActionButton(
           onPressed: () => controller.increment(),
           tooltip: 'Increment',
