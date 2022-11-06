@@ -48,7 +48,7 @@ class HomeView extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return GetX<HomeController>(builder: (controller) => Scaffold(
+    return Scaffold(
       appBar: AppBar(
         title: Text("HomeView"),
         actions: [
@@ -62,7 +62,12 @@ class HomeView extends GetView<HomeController> {
         child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget> [
-            Text(controller.count.value.toString()),
+            Obx(() => Text(controller.count.value.toString())),
+
+            // GetX<HomeController>(
+            //     builder: (controller) =>
+            //         Text(controller.count.value.toString())
+            // ),
           ],
         ),
       ),
@@ -102,6 +107,6 @@ class HomeView extends GetView<HomeController> {
           tooltip: 'Increment',
           child: Icon(Icons.add),
       ),
-    ));
+    );
   }
 }
