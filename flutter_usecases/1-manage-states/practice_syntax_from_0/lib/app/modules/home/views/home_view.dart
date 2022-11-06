@@ -48,7 +48,7 @@ class HomeView extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return GetX<HomeController>(builder: (controller) => Scaffold(
       appBar: AppBar(
         title: Text("HomeView"),
         actions: [
@@ -58,7 +58,16 @@ class HomeView extends GetView<HomeController> {
           )
         ],
       ),
-      body: controller.obx((data) {
+      body: Center(
+        child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget> [
+            Text(controller.count.value.toString()),
+          ],
+        ),
+      ),
+
+      /*controller.obx((data) {
         return ListView.builder(
           itemCount: data == null ? 0 : data.length,
           itemBuilder: (_, index) {
@@ -67,28 +76,32 @@ class HomeView extends GetView<HomeController> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget> [
-                      ListTile(
-                        leading: CircleAvatar(
-                          backgroundImage: NetworkImage(
-                            data![index]['picture']['large']
-                          ),
-                        ),
-                        title: Text("${data[index]['name']['title']}" + " " + "${data[index]['name']['first']}" + " " + "${data[index]['name']['last']}"),
-                        subtitle: Text("${data[index]['location']['city']}"),
-                        trailing: Text("Age: ${data[index]['dob']['age']}"),
-                      )
+                      Text(controller.value.toString()),
                     ],
+
+                    // children: <Widget> [
+                    //   ListTile(
+                    //     leading: CircleAvatar(
+                    //       backgroundImage: NetworkImage(
+                    //         data![index]['picture']['large']
+                    //       ),
+                    //     ),
+                    //     title: Text("${data[index]['name']['title']}" + " " + "${data[index]['name']['first']}" + " " + "${data[index]['name']['last']}"),
+                    //     subtitle: Text("${data[index]['location']['city']}"),
+                    //     trailing: Text("Age: ${data[index]['dob']['age']}"),
+                    //   )
+                    // ],
                   ),
                 )
             );
           },
         );
-      }, onError: (err) => Text("Err!")),
+      }, onError: (err) => Text("Err!")),*/
       floatingActionButton: new FloatingActionButton(
           onPressed: () => controller.increment(),
           tooltip: 'Increment',
           child: Icon(Icons.add),
       ),
-    );
+    ));
   }
 }
