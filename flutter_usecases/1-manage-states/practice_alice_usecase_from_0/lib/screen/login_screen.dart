@@ -4,8 +4,6 @@ import 'package:get/get.dart';
 import 'package:practice_alice_usecase_from_0/utils/colors.dart';
 import 'package:practice_alice_usecase_from_0/utils/constant_strings.dart';
 
-import '../utils/routes/routes.dart';
-
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -16,6 +14,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formGlobalKey = GlobalKey<FormState>();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+  bool isChecked = false;
 
   @override
   void initState() {
@@ -25,20 +24,39 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Color getColor(Set<MaterialState> states) {
+      const Set<MaterialState> interactiveStates = <MaterialState>{
+        MaterialState.pressed,
+        MaterialState.hovered,
+        MaterialState.focused,
+      };
+      if (states.any(interactiveStates.contains)) {
+        return Colors.green;
+      }
+      return Colors.green;
+    }
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Login Screen"),
-      ),
       body: Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(LOGIN_SCREEN_TITLE,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 30,
-                fontWeight:FontWeight.w800,
-                fontFamily: "inter",
+            Padding(
+              padding: EdgeInsets.only(bottom: 15.0),
+              child: Image(
+                width: 150,
+                image: AssetImage('assets/launch_icon/myalice_black_trnsprnt.png'),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(bottom: 20.0),
+              child: Text(LOGIN_SCREEN_TITLE,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight:FontWeight.w800,
+                  fontFamily: "inter",
+                ),
               ),
             ),
             SizedBox(
@@ -56,24 +74,77 @@ class _LoginScreenState extends State<LoginScreen> {
                           controller: _emailController,
                           autovalidateMode: AutovalidateMode.disabled,
                           autofocus: true,
-                          decoration: InputDecoration(
-                              hintText: "Email Address"
-                          ),
                           validator: (value) {
+                            // final: https://api.flutter.dev/flutter/dart-core/String/trim.html
                             final trimmed = value!.trim();
+                            print("[---ok---] ui trimmed=$trimmed"); // Debug
 
-                            return GetUtils.isEmail(trimmed) ? null : "Please enter valid Email.\n";
+                            return GetUtils.isEmail(trimmed)
+                                ? null
+                                : "Please enter valid Email\n";
                           },
+                          decoration: InputDecoration(
+                              hintText: "Email Address",
+                              errorStyle: TextStyle(fontSize: 12, height: 0.5),
+                              focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.red,
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(10.0),
+                                    topRight: Radius.circular(10.0),
+                                  )),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.red,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(10.0),
+                                  topRight: Radius.circular(10.0),
+                                ),
+                              ),
+                              contentPadding: EdgeInsets.symmetric(
+                                vertical: 0.0,
+                                horizontal: 20.0,
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.grey,
+                                  width: 0.5,
+                                ),
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(10.0),
+                                  topRight: Radius.circular(10.0),
+                                ),
+                              ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: AliceColors.ALICE_GREEN,
+                                width: 1.0,
+                              ),
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(10.0),
+                                topRight: Radius.circular(10.0),
+                              ),
+                            ),
+                          ),
                         )
                     ),
                     Padding(
                         padding: EdgeInsets.symmetric(horizontal: 16),
                         child: TextFormField(
-                          controller: null,
+                          controller: _passwordController,
                           autovalidateMode: AutovalidateMode.disabled,
                           textAlign: TextAlign.start,
+                          autofocus: false,
+                          onChanged: (value) {},
+                          validator: (value) {
+                            return value!.isNotEmpty ? null : "Required field";
+                          },
                           decoration: InputDecoration(
-                            hintText: "Password",
+                            hintText: "Your Password",
                             suffixIcon: IconButton(
                               icon: Icon(
                                 passwordVisible == true
@@ -87,7 +158,50 @@ class _LoginScreenState extends State<LoginScreen> {
                                   });
                                 }
                               },
-                            )
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.red,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(10.0),
+                                  bottomRight: Radius.circular(10.0),
+                                )),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.red,
+                                width: 1.0,
+                              ),
+                              borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(10.0),
+                                bottomRight: Radius.circular(10.0),
+                              ),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.grey,
+                                width: 0.5,
+                              ),
+                              borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(10.0),
+                                bottomRight: Radius.circular(10.0),
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: AliceColors.ALICE_GREEN,
+                                width: 1.0,
+                              ),
+                              borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(10.0),
+                                bottomRight: Radius.circular(10.0),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.symmetric(
+                              vertical: 0.0,
+                              horizontal: 20.0,
+                            ),
                           ),
                           obscureText: passwordVisible,
                           keyboardType: TextInputType.visiblePassword,
@@ -137,6 +251,48 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               )
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Align(
+                  alignment: FractionalOffset.centerLeft,
+                  child: Row(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(left: 8.0),
+                          child: Checkbox(
+                            checkColor: Colors.white,
+                            fillColor: MaterialStateProperty.resolveWith(getColor),
+                            value: isChecked,
+                            onChanged: (bool? value) {
+                              setState(() {
+                                isChecked = value!;
+                              });
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 0.0),
+                          child: Expanded (
+                              child: Text('Remember Me')
+                          ),
+                        )
+                      ],
+                  ),
+                ),
+                Align(
+                  alignment: FractionalOffset.centerRight,
+                  child: Padding(
+                    padding: EdgeInsets.only(right: 20.0),
+                        child: Expanded(
+                          child: Text("Forgot your password?",
+                            style: TextStyle(color: Colors.blue),
+                          ),
+                        )
+                  ),
+                ),
+              ],
             )
           ],
         ),
