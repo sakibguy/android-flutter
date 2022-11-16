@@ -14,9 +14,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   String? token;
-  // Color color1 = HexColor("b74093");
   Color myAliceTextColor = HexColor("#111827");
-  // Color color3 = HexColor("#88b74093"); // If you wish to use ARGB format
 
   @override
   void initState() {
@@ -36,14 +34,6 @@ class _SplashScreenState extends State<SplashScreen> {
                     image: AssetImage('assets/launch_icon/myalice_black_trnsprnt.png')
                 ),
               ),
-              // Expanded(
-              //   child: Align(
-              //     alignment: FractionalOffset.bottomCenter,
-              //     child: Image(
-              //         image: AssetImage('assets/launch_icon/myalice_black_trnsprnt.png')
-              //     ),
-              //   ),
-              // ),
               Align(
                   alignment: FractionalOffset.bottomCenter,
                   child: Text(ALICE_LABS,
@@ -53,18 +43,6 @@ class _SplashScreenState extends State<SplashScreen> {
                     ),
                   )
               ),
-              // Expanded(
-              //     child: Align(
-              //       alignment: FractionalOffset.bottomCenter,
-              //         child: Text(ALICE_LABS,
-              //           style: TextStyle(
-              //             fontSize: 20,
-              //             fontWeight: FontWeight.bold,
-              //           ),
-              //         )
-              //     ),
-              // ),
-
               Align(
                   alignment: FractionalOffset.bottomCenter,
                   child: Padding(
@@ -74,17 +52,6 @@ class _SplashScreenState extends State<SplashScreen> {
                     ),
                   )
               )
-              // Expanded(
-              //   child: Align(
-              //     alignment: FractionalOffset.bottomCenter,
-              //     child: Padding(
-              //       padding: EdgeInsets.only(bottom: 10.0),
-              //       child: Image(
-              //           image: AssetImage('assets/other_imgs/line.png')
-              //       ),
-              //     )
-              //   )
-              // )
             ],
           )
         )
@@ -97,7 +64,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
     Timer(Duration(seconds: 5), () {
       // Get.offNamed(LOGIN_PAGE);
-      token != null && token!.isNotEmpty ? Get.offNamed(INBOX_PAGE): Get.offNamed(LOGIN_PAGE);
+      // token != null && token!.isNotEmpty ? Get.offNamed(LOGIN_PAGE) : Get.offNamed(INBOX_PAGE);
+      token != null && token!.isNotEmpty ? Get.offNamed(INBOX_PAGE) : Get.offNamed(LOGIN_PAGE);
     });
   }
 }

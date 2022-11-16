@@ -65,6 +65,14 @@ flutter:
   assets:
     - assets/launch_icon/
     - assets/other_imgs/line.png
+    - assets/other_imgs/fi_search.png
+    - assets/other_imgs/filter.png
+    - assets/other_imgs/avatar.png
+    - assets/other_imgs/fi_menu.png
+    - assets/other_imgs/telegram.png
+    - assets/other_imgs/yellow_pin.png
+    - assets/other_imgs/filter_gray.png
+    - assets/other_imgs/get_help.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
