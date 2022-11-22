@@ -64,8 +64,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
     Timer(Duration(seconds: 5), () {
       // Get.offNamed(LOGIN_PAGE);
-      // token != null && token!.isNotEmpty ? Get.offNamed(LOGIN_PAGE) : Get.offNamed(INBOX_PAGE);
-      token != null && token!.isNotEmpty ? Get.offNamed(INBOX_PAGE) : Get.offNamed(LOGIN_PAGE);
+      token != null && token!.isNotEmpty ? Get.offNamed(LOGIN_PAGE) : Get.offNamed(INBOX_PAGE);
+      // token != null && token!.isNotEmpty ? Get.offNamed(INBOX_PAGE) : Get.offNamed(LOGIN_PAGE);
     });
   }
 }
