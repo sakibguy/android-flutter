@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.ogg_opus_player">
+    package="com.example.ogg_opus_player_demo">
    <application
-        android:label="ogg_opus_player"
+        android:label="ogg_opus_player_demo"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

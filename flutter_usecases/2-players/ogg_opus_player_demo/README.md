@@ -1,4 +1,4 @@
-# ogg_opus_player
+# ogg_opus_player_demo
 
 A new Flutter project.
 
