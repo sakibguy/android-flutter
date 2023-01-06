@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/material.dart';
 
 void main() {
@@ -46,6 +47,182 @@ class AutocompleteBasicExample extends StatelessWidget {
         onSelected: (String selection) {
           debugPrint('You just selected $selection');
         },
+    );
+  }
+}*/
+
+import 'package:autocomplete/utils/colors.dart';
+import 'package:flutter/material.dart';
+import 'package:autocomplete/country_page.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: AutoCompleteDemo(),
+    );
+  }
+}
+
+
+const List<Country> countryOptions = <Country>[
+  Country(name: 'Lambda Bags', size: 30370000),
+  Country(name: 'Online Clothing Store', size: 44579000),
+  Country(name: 'Online Clothing Store', size: 8600000),
+  Country(name: 'MyAura', size: 110879),
+  Country(name: 'Online Clothing Store', size: 9984670),
+  Country(name: 'Denmark', size: 42916),
+  Country(name: 'Europe', size: 10180000),
+  Country(name: 'India', size: 3287263),
+  Country(name: 'North America', size: 24709000),
+  Country(name: 'South America', size: 17840000),
+];
+
+class AutoCompleteDemo extends StatefulWidget {
+
+  @override
+  State<StatefulWidget> createState() => _AutoCompleteDemoState();
+}
+
+class _AutoCompleteDemoState extends State<AutoCompleteDemo> {
+  bool isChecked = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title:Text('Flutter AutoComplete Demo'),
+        backgroundColor: Colors.cyan,
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(15.0),
+        child: Autocomplete<Country>(
+          optionsBuilder: (TextEditingValue textEditingValue) {
+            return countryOptions
+                .where((Country county) => county.name.toLowerCase()
+                .startsWith(textEditingValue.text.toLowerCase())
+            )
+                .toList();
+          },
+          displayStringForOption: (Country option) => option.name,
+          fieldViewBuilder: (
+              BuildContext context,
+              TextEditingController fieldTextEditingController,
+              FocusNode fieldFocusNode,
+              VoidCallback onFieldSubmitted
+              ) {
+            return TextField(
+              controller: fieldTextEditingController,
+              focusNode: fieldFocusNode,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            );
+          },
+          onSelected: (Country selection) {
+            print('Selected: ${selection.name}');
+          },
+          optionsViewBuilder: (
+              BuildContext context,
+              AutocompleteOnSelected<Country> onSelected,
+              Iterable<Country> options
+              ) {
+            return Align(
+              alignment: Alignment.topLeft,
+              child: Material(
+                child: Container(
+                  width: /*300*/ MediaQuery.of(context).size.width - 32,
+                  height: 300,
+                  // color: /*Colors.cyan*/ Colors.white,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: Colors.grey)),
+                  child: ListView.builder(
+                    padding: EdgeInsets.all(10.0),
+                    itemCount: options.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final Country option = options.elementAt(index);
+
+                      return GestureDetector(
+                        onTap: () {
+                          onSelected(option);
+                        },
+                        child: ListTile(
+                          title: Container(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Transform.translate(
+                                // e.g: vertical negative margin. https://stackoverflow.com/questions/48086486/does-flutter-support-negative-margin
+                                offset: const Offset(-26, 0),
+                                  child: /*Text("CB")*/
+                                  Checkbox(
+                                    checkColor: Colors.white,
+                                    // fillColor: MaterialStateProperty.resolveWith(getColor),
+                                    value: isChecked,
+                                    onChanged: (bool? value) {
+                                      setState(() {
+                                        isChecked = value!;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                /*Padding(
+                                  padding: EdgeInsets.only(left: 12),
+                                  child: Text(option.name, style: const TextStyle(color: Colors.black)),
+                                ),*/
+                                Transform.translate(
+                                  offset: const Offset(-26, 0),
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(right: 6.0),
+                                    child: Image.network('https://picsum.photos/250?image=9', width: 18, height: 18),
+                                  ),
+                                ),
+                                Transform.translate(
+                                  offset: const Offset(-26, 0),
+                                  child:
+                                  Padding(
+                                      padding: EdgeInsets.only(left: 4),
+                                      child: Text(option.name, style: const TextStyle(color: Colors.black))
+                                  ),
+                                ),
+                                Transform.translate(
+                                  offset: const Offset(-26, 0),
+                                  child: Padding(
+                                    padding: EdgeInsets.only(left: 8),
+                                    child:
+                                    /*_inboxController.currentQueueTotal.value*/ 3 >= 2
+                                        ? Container(
+                                        child: Text(
+                                          "SMART",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w500,
+                                              color: AliceColors.ALICE_GREEN_800,
+                                              fontSize: 12),
+                                        ),
+                                        padding: EdgeInsets.fromLTRB(4, 2, 4, 2),
+                                        decoration: BoxDecoration(
+                                            color: AliceColors.ALICE_GREEN_100,
+                                            borderRadius: BorderRadius.circular(4)))
+                                        : Container(),
+                                  ),
+                                ),
+                              ],
+                            )
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
+      ),
     );
   }
 }
