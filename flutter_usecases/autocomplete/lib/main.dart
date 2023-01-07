@@ -93,6 +93,18 @@ class _AutoCompleteDemoState extends State<AutoCompleteDemo> {
 
   @override
   Widget build(BuildContext context) {
+    Color getColor(Set<MaterialState> states) {
+      const Set<MaterialState> interactiveStates = <MaterialState>{
+        MaterialState.pressed,
+        MaterialState.hovered,
+        MaterialState.focused,
+      };
+      if (states.any(interactiveStates.contains)) {
+        return Colors.green;
+      }
+      return Colors.green;
+    }
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -133,90 +145,265 @@ class _AutoCompleteDemoState extends State<AutoCompleteDemo> {
             return Align(
               alignment: Alignment.topLeft,
               child: Material(
-                child: Container(
-                  width: /*300*/ MediaQuery.of(context).size.width - 32,
-                  height: 300,
-                  // color: /*Colors.cyan*/ Colors.white,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: Colors.grey)),
-                  child: ListView.builder(
-                    padding: EdgeInsets.all(10.0),
-                    itemCount: options.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      final Country option = options.elementAt(index);
-
-                      return GestureDetector(
-                        onTap: () {
-                          onSelected(option);
-                        },
-                        child: ListTile(
-                          title: Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: AliceColors.ALICE_GREY_200),
+                          /*boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 5,
+                              //blurRadius: 7,
+                              offset: Offset(0, 3), // changes position of shadow
+                            ),
+                          ],*/
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Container(
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Transform.translate(
-                                // e.g: vertical negative margin. https://stackoverflow.com/questions/48086486/does-flutter-support-negative-margin
-                                offset: const Offset(-26, 0),
-                                  child: /*Text("CB")*/
-                                  Checkbox(
-                                    checkColor: Colors.white,
-                                    // fillColor: MaterialStateProperty.resolveWith(getColor),
-                                    value: isChecked,
-                                    onChanged: (bool? value) {
-                                      setState(() {
-                                        isChecked = value!;
-                                      });
-                                    },
-                                  ),
-                                ),
-                                /*Padding(
+                                GestureDetector(
+                                  child: Padding(
+                                    padding: EdgeInsets.only(top: 12.0, left: 16.0),
+                                    child: Text("Unselect All",
+                                      style: TextStyle(color: AliceColors.ALICE_BLUE),
+                                    ),
+                                  )
+                                )
+                              ],
+                            ),
+                          ),
+                          Container(
+                            width: /*300*/ MediaQuery.of(context).size.width - 32,
+                            height: 300,
+                            // color: /*Colors.cyan*/ Colors.white,
+                            child: ListView.builder(
+                              padding: EdgeInsets.all(10.0),
+                              itemCount: options.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                final Country option = options.elementAt(index);
+
+                                return GestureDetector(
+                                  /*onTap: () {
+                          onSelected(option);
+                        },*/
+                                  child: ListTile(
+                                    title: Container(
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            Transform.translate(
+                                              // e.g: vertical negative margin. https://stackoverflow.com/questions/48086486/does-flutter-support-negative-margin
+                                              offset: const Offset(-26, 0),
+                                              child: /*Text("CB")*/
+                                              Checkbox(
+                                                checkColor: Colors.white,
+                                                fillColor: MaterialStateProperty.resolveWith(getColor),
+                                                value: isChecked,
+                                                onChanged: (bool? value) {
+                                                  setState(() {
+                                                    isChecked = value!;
+                                                  });
+                                                },
+                                              ),
+                                            ),
+                                            /*Padding(
                                   padding: EdgeInsets.only(left: 12),
                                   child: Text(option.name, style: const TextStyle(color: Colors.black)),
                                 ),*/
-                                Transform.translate(
-                                  offset: const Offset(-26, 0),
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(right: 6.0),
-                                    child: Image.network('https://picsum.photos/250?image=9', width: 18, height: 18),
+                                            Transform.translate(
+                                              offset: const Offset(-26, 0),
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(right: 6.0),
+                                                child: Image.network('https://picsum.photos/250?image=9', width: 18, height: 18),
+                                              ),
+                                            ),
+                                            Transform.translate(
+                                              offset: const Offset(-26, 0),
+                                              child:
+                                              Padding(
+                                                  padding: EdgeInsets.only(left: 4),
+                                                  child: Text(option.name, style: const TextStyle(color: Colors.black))
+                                              ),
+                                            ),
+                                            Transform.translate(
+                                              offset: const Offset(-26, 0),
+                                              child: Padding(
+                                                padding: EdgeInsets.only(left: 8),
+                                                child:
+                                                /*_inboxController.currentQueueTotal.value*/ 3 >= 2
+                                                    ? Container(
+                                                    child: Text(
+                                                      "SMART",
+                                                      style: TextStyle(
+                                                          fontWeight: FontWeight.w500,
+                                                          color: AliceColors.ALICE_GREEN_800,
+                                                          fontSize: 12),
+                                                    ),
+                                                    padding: EdgeInsets.fromLTRB(4, 2, 4, 2),
+                                                    decoration: BoxDecoration(
+                                                        color: AliceColors.ALICE_GREEN_100,
+                                                        borderRadius: BorderRadius.circular(4)))
+                                                    : Container(),
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                    ),
                                   ),
-                                ),
-                                Transform.translate(
-                                  offset: const Offset(-26, 0),
-                                  child:
-                                  Padding(
-                                      padding: EdgeInsets.only(left: 4),
-                                      child: Text(option.name, style: const TextStyle(color: Colors.black))
-                                  ),
-                                ),
-                                Transform.translate(
-                                  offset: const Offset(-26, 0),
-                                  child: Padding(
-                                    padding: EdgeInsets.only(left: 8),
-                                    child:
-                                    /*_inboxController.currentQueueTotal.value*/ 3 >= 2
-                                        ? Container(
-                                        child: Text(
-                                          "SMART",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w500,
-                                              color: AliceColors.ALICE_GREEN_800,
-                                              fontSize: 12),
+                                );
+                              },
+                            ),
+                            /*child: Container(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ListView.builder(
+                          padding: EdgeInsets.all(10.0),
+                          itemCount: options.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            final Country option = options.elementAt(index);
+
+                            return GestureDetector(
+                              onTap: () {
+                                onSelected(option);
+                              },
+                              child: ListTile(
+                                title: Container(
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        Transform.translate(
+                                          // e.g: vertical negative margin. https://stackoverflow.com/questions/48086486/does-flutter-support-negative-margin
+                                          offset: const Offset(-26, 0),
+                                          child: *//*Text("CB")*//*
+                                          Checkbox(
+                                            checkColor: Colors.white,
+                                            fillColor: MaterialStateProperty.resolveWith(getColor),
+                                            value: isChecked,
+                                            onChanged: (bool? value) {
+                                              setState(() {
+                                                isChecked = value!;
+                                              });
+                                            },
+                                          ),
                                         ),
-                                        padding: EdgeInsets.fromLTRB(4, 2, 4, 2),
-                                        decoration: BoxDecoration(
-                                            color: AliceColors.ALICE_GREEN_100,
-                                            borderRadius: BorderRadius.circular(4)))
-                                        : Container(),
-                                  ),
+                                        *//*Padding(
+                                  padding: EdgeInsets.only(left: 12),
+                                  child: Text(option.name, style: const TextStyle(color: Colors.black)),
+                                ),*//*
+                                        Transform.translate(
+                                          offset: const Offset(-26, 0),
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(right: 6.0),
+                                            child: Image.network('https://picsum.photos/250?image=9', width: 18, height: 18),
+                                          ),
+                                        ),
+                                        Transform.translate(
+                                          offset: const Offset(-26, 0),
+                                          child:
+                                          Padding(
+                                              padding: EdgeInsets.only(left: 4),
+                                              child: Text(option.name, style: const TextStyle(color: Colors.black))
+                                          ),
+                                        ),
+                                        Transform.translate(
+                                          offset: const Offset(-26, 0),
+                                          child: Padding(
+                                            padding: EdgeInsets.only(left: 8),
+                                            child:
+                                            *//*_inboxController.currentQueueTotal.value*//* 3 >= 2
+                                                ? Container(
+                                                child: Text(
+                                                  "SMART",
+                                                  style: TextStyle(
+                                                      fontWeight: FontWeight.w500,
+                                                      color: AliceColors.ALICE_GREEN_800,
+                                                      fontSize: 12),
+                                                ),
+                                                padding: EdgeInsets.fromLTRB(4, 2, 4, 2),
+                                                decoration: BoxDecoration(
+                                                    color: AliceColors.ALICE_GREEN_100,
+                                                    borderRadius: BorderRadius.circular(4)))
+                                                : Container(),
+                                          ),
+                                        ),
+                                      ],
+                                    )
                                 ),
-                              ],
-                            )
-                          ),
+                              ),
+                            );
+                          },
                         ),
-                      );
-                    },
-                  ),
+                        Text("Button"),
+                      ],
+                    ),
+                  ),*/
+                          ),
+                          Container(
+                            width: MediaQuery.of(context).size.width - 32,
+                            height: 0.5,
+                            color: AliceColors.ALICE_GREY_200,
+                            // child: Divider(color: Colors.grey),
+                          ),
+                          Container(
+                              width: /*300*/ MediaQuery.of(context).size.width - 32,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  GestureDetector(
+                                    child: Container(
+                                      margin: EdgeInsets.all(8.0),
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(10),
+                                          border: Border.all(color: Colors.grey)),
+                                      child: Padding(
+                                        padding: EdgeInsets.only(top: 9, right: 13, bottom: 9, left: 9),
+                                        child: Text('Cancel',
+                                          style: TextStyle(
+                                              color: AliceColors.ALICE_GREY_700
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    onTap: (() {
+                                      print("[---ok---] Cancel button");
+                                    }),
+                                  ),
+                                  GestureDetector(
+                                    child: Container(
+                                      margin: EdgeInsets.all(8.0),
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(10),
+                                          border: Border.all(color: Colors.grey),
+                                          color: AliceColors.ALICE_GREEN_400
+                                      ),
+                                      child: Padding(
+                                        padding: EdgeInsets.only(top: 9, right: 13, bottom: 9, left: 9),
+                                        child: Text('Select',
+                                          style: TextStyle(
+                                              color: Colors.white
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    onTap: (() {
+                                      print("[---ok---] Select button");
+                                    }),
+                                  ),
+                                ],
+                              )
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ),
             );
