@@ -68,7 +68,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
 const List<Country> countryOptions = <Country>[
   Country(name: 'Lambda Bags', size: 30370000),
   Country(name: 'Online Clothing Store', size: 44579000),
@@ -118,8 +117,7 @@ class _AutoCompleteDemoState extends State<AutoCompleteDemo> {
             return countryOptions
                 .where((Country county) => county.name.toLowerCase()
                 .startsWith(textEditingValue.text.toLowerCase())
-            )
-                .toList();
+            ).toList();
           },
           displayStringForOption: (Country option) => option.name,
           fieldViewBuilder: (
