@@ -1,4 +1,4 @@
-# FLUTTER wOrK 7 (DEV: 4, REBUILT: 3)
+# FLUTTER wOrK 8 (DEV: 5, REBUILT: 3)
 
 # 1-MYALICE (DEV)
 ## PRODUCT 1: MYALICEAPP
@@ -11,6 +11,8 @@
 > [design](https://www.figma.com/file/VyaAJJJusHvDtOt6MjkJBJ/Sporting-App?node-id=0%3A1&t=UtYQC8kUAWm63Tzm-0)
 ## APP 3: GOODGAMESCHEDULE
 > [design](https://www.figma.com/file/nmiGfk7YStYREeCMj8Qeyj/Good-Game-Schedule?node-id=0%3A1&t=coxZnmUVqqVpocJ0-1)
+## APP 4: DECEIVEDMIND
+> [design](https://www.figma.com/file/lBnYUMEHOHa1YGRRTmYfPq/Deceived-Mind?node-id=0%3A1&t=n7XLZGcfgSAoMOAQ-0)
 
 # 2-MAKEAPP (REBUILT)
 ### game 1: WINCREATOR
