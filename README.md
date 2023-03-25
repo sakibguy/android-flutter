@@ -16,7 +16,7 @@
 ## GAME 5: GIMMEQUIZ
 > [design](https://www.figma.com/file/hcrZss2chmK6O2cbKflIT0/Gimme-Quiz?node-id=0-1&t=BMeoV6pnBYuS4i7u-0)
 ## GAME 6: LALIGAOBJETIVO
-> [design](https://www.figma.com/file/Fwk4nPGDnyFGQhWvZgfoDA/Untitled?node-id=0%3A1&t=OGOXcylUG7XsB0f0-0)
+> [design](https://www.figma.com/file/YuJZDgFOZfPHjlubaEZ8eT/La-liga-objetivo?node-id=0-1&t=aIwSCYbi1mUZkhlT-0)
 
 # 2-MAKEAPP (REBUILT)
 ### game 1: WINCREATOR
