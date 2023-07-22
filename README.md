@@ -1,4 +1,4 @@
-# FLUTTER wOrK 16 (DEV: 13, REBUILT: 3)
+# FLUTTER wOrK 17 (DEV: 14, REBUILT: 3)
 
 # 1-MYALICE (DEV)
 ## PRODUCT 1: MYALICEAPP
@@ -29,8 +29,8 @@
 > [design](https://www.figma.com/file/GOGC4toTB1xHacbXOJ6X6Y/The-Blue-Army?type=design&node-id=0-1&t=y74qPLOXNv9aUfS3-0)
 ## GAME 12: SOCCERLEGENDCOACH
 > [design](https://www.figma.com/file/adiU8GN88RCRQQv15yQgcW/Soccer-Legeng-Coach?type=design&node-id=2-103&mode=design&t=CXUada10wZr7fbgY-0)
-
-
+## GAME 13: CLUBPUZZLE
+> [design](https://www.figma.com/file/eHdBI3b8AQDw8vqAhiYeEB/Club-Puzzle?type=design&node-id=0-1&mode=design&t=aOQCYrhRy8D6LNsR-0)
 
 # 2-MAKEAPP (REBUILT)
 ### game 1: WINCREATOR
